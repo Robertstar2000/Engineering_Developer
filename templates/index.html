@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}Welcome - Engineering Partner AI{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h2 class="page-header">Welcome to the Intelligent Engineering Partner!</h2>
+    <p class="tagline">Your AI-powered companion for navigating the engineering development lifecycle.</p>
+
+    <div class="welcome-content">
+        <p>This application is designed to guide you through the nine classical phases of engineering development. At each step, you can input key information, and leverage AI to:</p>
+        <ul>
+            <li>📝 Generate concise solution summaries.</li>
+            <li>📄 Create detailed phase-specific documents based on structured outlines.</li>
+            <li>🌱 Seed data for subsequent phases to ensure consistency and save time.</li>
+        </ul>
+        <p>Select a phase from the sidebar navigation to begin your journey or to continue your work.</p>
+    </div>
+
+    <div class="quick-links">
+        <h3>Quick Navigation:</h3>
+        <ul>
+            {% for phase_item in get_all_phases_for_nav() %}
+            <li><a href="{{ url_for('show_phase', phase_id=phase_item.id) }}" class="btn btn-quick-link">{{ phase_item.id }}. {{ phase_item.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,5 @@
+Flask>=2.0 # For the web framework itself
+PyYAML>=5.0 # For parsing phases.yaml
+google-generativeai>=0.5.0 # For interacting with the Gemini API
+backoff>=2.0.0 # For retry logic with the Gemini API
+python-dotenv>=0.15 # Optional: For managing environment variables from a .env file during development

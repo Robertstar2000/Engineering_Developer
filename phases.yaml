@@ -1,0 +1,252 @@
+phases:
+  1:
+    id: 1
+    title: "Problem Definition & Planning"
+    doc_shortname: "ProblemDef"
+    fields:
+      project_name: {label: "Project Name", type: single, placeholder: "E.g., Intelligent Engineering Partner App"}
+      objective: {label: "Project Objective", type: multi, placeholder: "What is the primary goal of this project?"}
+      stakeholders: {label: "Key Stakeholders", type: multi, placeholder: "Who are the key people involved or affected? (e.g., Users, Product Owner, Dev Team)"}
+      constraints: {label: "Known Constraints & Assumptions", type: multi, placeholder: "E.g., budget limitations, timeline, technology stack, resource availability, key assumptions made."}
+    document:
+      name: "problem_definition_and_planning_statement.md"
+      outline:
+        - "## 1. Project Overview"
+        - "### 1.1. Project Name"
+        - "### 1.2. Executive Summary"
+        - "## 2. Project Objectives & Success Criteria"
+        - "### 2.1. Primary Objectives"
+        - "### 2.2. Key Success Metrics"
+        - "## 3. Stakeholder Identification"
+        - "### 3.1. Stakeholder Register"
+        - "### 3.2. Roles and Responsibilities (Brief)"
+        - "## 4. Constraints and Assumptions"
+        - "### 4.1. Technical Constraints"
+        - "### 4.2. Resource Constraints"
+        - "### 4.3. Business Constraints"
+        - "### 4.4. Key Assumptions"
+  2:
+    id: 2
+    title: "Requirements Engineering"
+    doc_shortname: "SRS"
+    fields:
+      functional_reqs: {label: "Functional Requirements", type: multi, placeholder: "Describe what the system must do. Use user stories or numbered lists (e.g., FR1: The system shall allow user registration.)."}
+      nonfunctional_reqs: {label: "Non-functional Requirements", type: multi, placeholder: "E.g., Performance: Page load < 2s; Security: OWASP Top 10 mitigation; Usability: WCAG 2.1 AA compliance."}
+      data_reqs: {label: "Data Requirements", type: multi, placeholder: "Describe key data entities, formats, persistence needs, and data sources/sinks."}
+      acceptance_criteria: {label: "Overall Acceptance Criteria / Scope Definition", type: multi, placeholder: "How will you know the overall project/MVP requirements are met? Define clear boundaries."}
+    document:
+      name: "software_requirements_specification.md"
+      outline:
+        - "## 1. Introduction"
+        - "### 1.1. Purpose of this Document"
+        - "### 1.2. Project Scope & Objectives (Reference Phase 1)"
+        - "### 1.3. Target Audience"
+        - "## 2. Functional Requirements"
+        - "### 2.1. (List/Group Functional Requirements here)"
+        - "## 3. Non-Functional Requirements"
+        - "### 3.1. Performance"
+        - "### 3.2. Security"
+        - "### 3.3. Usability"
+        - "### 3.4. Reliability"
+        - "### 3.5. Maintainability"
+        - "## 4. Data Requirements"
+        - "### 4.1. Key Data Entities"
+        - "### 4.2. Data Storage and Persistence"
+        - "## 5. Acceptance Criteria and Validation"
+        - "### 5.1. Overall Acceptance Strategy"
+  3:
+    id: 3
+    title: "System Architecture & High-Level Design"
+    doc_shortname: "HLD"
+    fields:
+      system_context: {label: "System Context & Boundaries", type: multi, placeholder: "Describe the system's environment, its major components, and interactions with external systems or users."}
+      architectural_drivers: {label: "Key Architectural Drivers", type: multi, placeholder: "What are the main quality attributes (from NFRs) or constraints driving the architecture? (e.g., scalability, security, cost)"}
+      chosen_architecture: {label: "Chosen Architectural Pattern(s)", type: multi, placeholder: "E.g., Microservices, Monolith, Layered, Event-Driven. Justify the choice."}
+      high_level_components: {label: "High-Level Components & Responsibilities", type: multi, placeholder: "Identify major subsystems/modules and their primary roles. A diagram description can go here."}
+      data_flow_overview: {label: "Data Flow Overview", type: multi, placeholder: "Describe how data flows between the high-level components for key use cases."}
+      tech_stack_summary: {label: "Technology Stack Summary", type: multi, placeholder: "List key technologies (languages, frameworks, databases, cloud services) and rationale."}
+      deployment_overview: {label: "Conceptual Deployment Model", type: multi, placeholder: "Briefly describe how the system will be deployed (e.g., cloud, on-premise, containerization strategy)."}
+    document:
+      name: "high_level_design_document.md"
+      outline:
+        - "## 1. Introduction"
+        - "### 1.1. Purpose and Scope"
+        - "### 1.2. Architectural Goals and Constraints (Drivers)"
+        - "## 2. System Overview"
+        - "### 2.1. System Context Diagram (Description)"
+        - "### 2.2. Architectural Style/Pattern"
+        - "## 3. High-Level Component Breakdown"
+        - "### 3.1. Component Diagram (Description)"
+        - "### 3.2. Component Responsibilities"
+        - "## 4. Data Design Overview"
+        - "### 4.1. High-Level Data Flow"
+        - "### 4.2. Major Data Stores"
+        - "## 5. Technology Stack"
+        - "## 6. Deployment Strategy Overview"
+        - "## 7. Design Rationale & Trade-offs"
+  4:
+    id: 4
+    title: "Detailed Design"
+    doc_shortname: "DDD"
+    fields:
+      component_specs: {label: "Component Detailed Specifications", type: multi, placeholder: "For each key component from HLD: Class diagrams (description), sequence diagrams (description for key interactions), specific algorithms."}
+      api_definitions: {label: "API Definitions / Interface Specifications", type: multi, placeholder: "Define REST endpoints, gRPC services, message formats, etc., for inter-component and external communication. Include request/response formats."}
+      data_model_detailed: {label: "Detailed Data Model / Database Schema", type: multi, placeholder: "Detailed schemas for databases (tables, columns, types, relationships), data dictionaries."}
+      error_handling_strategy: {label: "Error Handling and Logging Strategy", type: multi, placeholder: "How will errors be handled, propagated, and logged across components?"}
+      security_design_details: {label: "Security Design Details", type: multi, placeholder: "Specific security mechanisms, authentication/authorization flows, data encryption details."}
+    document:
+      name: "detailed_design_document.md"
+      outline:
+        - "## 1. Introduction"
+        - "### 1.1. Purpose (Reference HLD)"
+        - "## 2. Detailed Component Design"
+        - "### 2.1. Component A (Details: interfaces, logic, data structures)"
+        - "### 2.2. Component B (Details: ...)"
+        - "## 3. Interface Specifications (APIs)"
+        - "### 3.1. Internal APIs"
+        - "### 3.2. External APIs"
+        - "## 4. Detailed Data Design"
+        - "### 4.1. Database Schema"
+        - "### 4.2. Data Dictionary"
+        - "## 5. Security Design Details"
+        - "## 6. Error Handling and Logging Strategy"
+  5:
+    id: 5
+    title: "Implementation / Build"
+    doc_shortname: "ImplGuide"
+    fields:
+      development_environment_setup: {label: "Development Environment Setup Guide", type: multi, placeholder: "Steps to set up a local dev environment: required software, versions, configuration, IDE setup."}
+      build_process: {label: "Build Process & CI/CD Overview", type: multi, placeholder: "How is the code built, tested, and packaged? Overview of the CI/CD pipeline stages."}
+      coding_standards_and_guidelines: {label: "Coding Standards & Guidelines", type: multi, placeholder: "Link to or summarize key coding conventions, style guides, branching strategy, code review process."}
+      key_libraries_frameworks_usage: {label: "Key Libraries/Frameworks Usage Notes", type: multi, placeholder: "Specific notes on how major libraries or frameworks are used, common patterns, or pitfalls to avoid."}
+      implementation_notes_general: {label: "General Implementation Notes", type: multi, placeholder: "Any overarching notes for developers during the build phase."}
+      code_repository_structure: {label: "Code Repository Structure (Link/Overview)", type: single, placeholder: "Link to repository or brief overview of main directories."}
+    document:
+      name: "implementation_and_build_guide.md"
+      outline:
+        - "## 1. Introduction"
+        - "## 2. Development Environment Setup"
+        - "### 2.1. Prerequisites"
+        - "### 2.2. Setup Steps"
+        - "## 3. Source Code Management"
+        - "### 3.1. Repository URL and Structure"
+        - "### 3.2. Branching Strategy"
+        - "## 4. Build and CI/CD Process"
+        - "### 4.1. Build Instructions"
+        - "### 4.2. CI/CD Pipeline Overview"
+        - "## 5. Coding Standards and Best Practices"
+        - "## 6. Notes on Key Libraries & Frameworks"
+  6:
+    id: 6
+    title: "Verification & Validation (Testing)"
+    doc_shortname: "TestPlan"
+    fields:
+      testing_scope_and_objectives: {label: "Testing Scope & Objectives", type: multi, placeholder: "What will be tested (modules, features, NFRs)? What are the goals of testing?"}
+      test_levels_and_types: {label: "Test Levels & Types", type: multi, placeholder: "E.g., Unit, Integration, System, Acceptance. Manual/Automated. Performance, Security testing approaches."}
+      test_environment_setup: {label: "Test Environment Configuration", type: multi, placeholder: "Details of the test environment(s): hardware, software, data, tools."}
+      test_data_management: {label: "Test Data Management Strategy", type: multi, placeholder: "How will test data be created, managed, and refreshed?"}
+      test_execution_plan: {label: "Test Execution Plan", type: multi, placeholder: "Who executes tests, when, how? Entry/exit criteria for test phases."}
+      defect_tracking_process: {label: "Defect Tracking & Reporting Process", type: multi, placeholder: "Tools and process for logging, tracking, and resolving defects."}
+      test_deliverables: {label: "Test Deliverables", type: multi, placeholder: "E.g., Test Plan, Test Cases, Test Summary Report, Defect Reports."}
+    document:
+      name: "test_plan_and_strategy.md" # Could also be Test Summary Report later
+      outline:
+        - "## 1. Introduction"
+        - "### 1.1. Purpose and Scope of Testing"
+        - "### 1.2. Test Objectives"
+        - "## 2. Test Strategy"
+        - "### 2.1. Test Levels (Unit, Integration, System, UAT)"
+        - "### 2.2. Types of Testing (Functional, Performance, Security, etc.)"
+        - "### 2.3. Automation Strategy"
+        - "## 3. Test Environment"
+        - "### 3.1. Hardware and Software Requirements"
+        - "### 3.2. Test Data Preparation"
+        - "## 4. Test Execution"
+        - "### 4.1. Test Cycles and Schedule"
+        - "### 4.2. Entry and Exit Criteria"
+        - "## 5. Defect Management Process"
+        - "## 6. Test Deliverables and Reporting"
+  7:
+    id: 7
+    title: "Deployment / Release"
+    doc_shortname: "DeployPlan"
+    fields:
+      release_version_and_scope: {label: "Release Version & Scope", type: single, placeholder: "E.g., Version 1.0.0 - MVP features."}
+      deployment_environments: {label: "Target Deployment Environments", type: multi, placeholder: "List target environments (e.g., Staging, Production) and their configurations."}
+      pre_deployment_checklist: {label: "Pre-Deployment Checklist", type: multi, placeholder: "Tasks to complete before deployment (e.g., backups, stakeholder notification, final tests)."}
+      deployment_steps_detailed: {label: "Detailed Deployment Steps / Runbook", type: multi, placeholder: "Step-by-step procedure for deploying the release to each environment."}
+      rollback_plan: {label: "Rollback Plan", type: multi, placeholder: "Procedure to revert to the previous stable version if deployment fails."}
+      post_deployment_verification: {label: "Post-Deployment Verification Steps", type: multi, placeholder: "Checks to perform after deployment to ensure success (e.g., smoke tests, health checks)."}
+      release_notes_summary: {label: "Release Notes (Summary for this document)", type: multi, placeholder: "Key features, bug fixes, known issues in this release."}
+    document:
+      name: "deployment_and_release_plan.md"
+      outline:
+        - "## 1. Release Overview"
+        - "### 1.1. Release Version and Date"
+        - "### 1.2. Scope of this Release (Features, Fixes)"
+        - "## 2. Deployment Environments"
+        - "## 3. Pre-Deployment Plan"
+        - "### 3.1. Checklist"
+        - "### 3.2. Communication Plan"
+        - "## 4. Deployment Procedure (Runbook)"
+        - "### 4.1. Steps for Staging Environment"
+        - "### 4.2. Steps for Production Environment"
+        - "## 5. Post-Deployment Verification Plan"
+        - "## 6. Rollback Strategy and Procedure"
+        - "## 7. Release Notes (Link or Full)"
+  8:
+    id: 8
+    title: "Operations & Maintenance"
+    doc_shortname: "OpsManual"
+    fields:
+      system_overview_for_ops: {label: "System Overview for Operations Team", type: multi, placeholder: "Brief architecture, key components, dependencies relevant to operations."}
+      monitoring_plan: {label: "Monitoring & Alerting Plan", type: multi, placeholder: "Key metrics to monitor, tools used, alert thresholds, and notification procedures."}
+      logging_details_for_ops: {label: "Logging Details for Operations", type: multi, placeholder: "Log locations, formats, key log messages to look for, log rotation/archival."}
+      backup_and_recovery_procedures: {label: "Backup & Recovery Procedures", type: multi, placeholder: "Data backup schedule, tools, retention policy, and step-by-step recovery process."}
+      common_troubleshooting_guide: {label: "Common Troubleshooting Guide", type: multi, placeholder: "Known issues and their resolutions, common operational tasks, FAQs for support."}
+      maintenance_schedule_and_tasks: {label: "Maintenance Schedule & Tasks", type: multi, placeholder: "Routine maintenance activities, schedule, and procedures (e.g., patching, updates, cleanup)."}
+      escalation_paths_and_contacts: {label: "Escalation Paths & Support Contacts", type: multi, placeholder: "Who to contact for different types of issues, support levels, on-call rotation if any."}
+    document:
+      name: "operations_and_maintenance_manual.md"
+      outline:
+        - "## 1. System Overview for Operations"
+        - "## 2. Monitoring and Alerting"
+        - "### 2.1. Key Metrics and Dashboards"
+        - "### 2.2. Alerting Configuration"
+        - "## 3. Logging"
+        - "### 3.1. Log Access and Analysis"
+        - "## 4. Backup and Recovery"
+        - "### 4.1. Backup Schedule and Procedure"
+        - "### 4.2. Data Recovery Steps"
+        - "## 5. Routine Maintenance Procedures"
+        - "## 6. Troubleshooting Guide"
+        - "### 6.1. Common Issues and Resolutions"
+        - "## 7. Escalation Procedures and Contacts"
+  9:
+    id: 9
+    title: "Post-mortem & Continuous Improvement"
+    doc_shortname: "PostMortem"
+    fields:
+      project_summary_and_outcomes: {label: "Project Summary & Final Outcomes", type: multi, placeholder: "Brief overview of the project and whether it met its original objectives (from Phase 1)."}
+      what_went_well: {label: "What Went Well?", type: multi, placeholder: "Positive aspects of the project: processes, tools, teamwork, successes."}
+      what_could_be_improved: {label: "What Could Be Improved?", type: multi, placeholder: "Areas for improvement: challenges faced, process gaps, technical debt."}
+      key_metrics_review: {label: "Key Metrics Review (vs. Goals)", type: multi, placeholder: "Review of success metrics defined in Phase 1/2. Did we achieve them?"}
+      lessons_learned_technical: {label: "Technical Lessons Learned", type: multi, placeholder: "Specific insights related to technology choices, architecture, implementation."}
+      lessons_learned_process: {label: "Process & Team Lessons Learned", type: multi, placeholder: "Insights related to project management, team collaboration, communication."}
+      action_items_for_future: {label: "Action Items for Future Projects/Iterations", type: multi, placeholder: "Specific, actionable steps to apply these lessons learned going forward."}
+    document:
+      name: "post_mortem_and_lessons_learned_report.md"
+      outline:
+        - "## 1. Project Retrospective Overview"
+        - "### 1.1. Project Name and Period"
+        - "### 1.2. Meeting Original Objectives (Recap)"
+        - "## 2. Assessment of Outcomes"
+        - "### 2.1. What Went Well (Successes)"
+        - "### 2.2. Challenges Encountered (Areas for Improvement)"
+        - "## 3. Key Metrics Analysis (If Applicable)"
+        - "## 4. Detailed Lessons Learned"
+        - "### 4.1. Technical Insights"
+        - "### 4.2. Process and Collaboration Insights"
+        - "### 4.3. Product/Feature Insights"
+        - "## 5. Actionable Recommendations for Continuous Improvement"
+        - "## 6. Acknowledgements"

@@ -1,0 +1,423 @@
+/* --- Global Resets and Typography --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.65;
+    background-color: #f4f7f9; /* Light grayish blue background */
+    color: #333;
+    display: flex;
+    min-height: 100vh;
+    font-size: 16px;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/* --- Sidebar Styling --- */
+.sidebar {
+    width: 280px;
+    background: linear-gradient(145deg, #2c3e50, #3498db); /* Dark blue to lighter blue gradient */
+    color: #ecf0f1; /* Light text color for sidebar */
+    padding: 25px 15px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 3px 0 15px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar h1 {
+    font-size: 1.75em;
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sidebar h1 a {
+    color: #ffffff;
+    text-decoration: none;
+}
+.sidebar h1 .emoji {
+    margin-right: 10px;
+    font-size: 1.1em;
+    vertical-align: middle;
+}
+
+.sidebar nav {
+    flex-grow: 1;
+}
+.sidebar nav ul {
+    list-style-type: none;
+}
+
+.sidebar nav ul li a {
+    display: block;
+    color: #bdc3c7; /* Slightly muted link color */
+    padding: 12px 20px;
+    text-decoration: none;
+    border-radius: 6px;
+    margin-bottom: 7px;
+    transition: background-color 0.25s ease, color 0.25s ease, padding-left 0.25s ease, transform 0.15s ease;
+    font-size: 0.95em;
+}
+
+.sidebar nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    padding-left: 25px;
+    transform: translateX(3px);
+}
+.sidebar nav ul li a.active {
+    background-color: #3498db; /* Brighter blue for active link */
+    color: #ffffff;
+    font-weight: 600;
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+    padding-left: 25px;
+}
+
+.sidebar-footer {
+    padding-top: 20px;
+    border-top: 1px solid #4a627a;
+    font-size: 0.8em;
+    text-align: center;
+    color: #bdc3c7;
+}
+.sidebar-footer p {
+    margin-bottom: 5px;
+}
+
+/* --- Main Content Area --- */
+.main-content {
+    margin-left: 280px; /* Same as sidebar width */
+    padding: 20px 30px 40px 30px;
+    width: calc(100% - 280px);
+    background-color: #ffffff;
+}
+
+.page-container {
+    max-width: 1000px; /* Max width for content for better readability */
+    margin: 0 auto; /* Center content */
+}
+
+.page-header {
+    color: #2c3e50; /* Dark blue for headers */
+    margin-bottom: 25px;
+    border-bottom: 3px solid #3498db; /* Blue accent border */
+    padding-bottom: 15px;
+    font-size: 2em; /* Larger page header */
+    font-weight: 600;
+}
+.page-header .phase-number {
+    background-color: #3498db;
+    color: white;
+    padding: 2px 10px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.tagline {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.welcome-content ul, .quick-links ul {
+    list-style-position: inside;
+    padding-left: 0;
+}
+.welcome-content ul li, .quick-links ul li {
+    margin-bottom: 8px;
+}
+.quick-links h3 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+/* --- Form Styling --- */
+.phase-form .form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #495057; /* Darker gray for labels */
+    font-size: 0.95em;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ced4da; /* Standard border color */
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 1em;
+    color: #495057;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form-group input[type="text"]:focus,
+.form-group textarea:focus {
+    border-color: #3498db; /* Blue focus border */
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+    outline: none;
+}
+
+.form-group textarea {
+    min-height: 120px; /* Default min height */
+    resize: vertical;
+}
+
+/* --- Button Styling --- */
+.action-buttons-group {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #e9ecef;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 500;
+    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.3px;
+}
+.btn .emoji {
+    margin-right: 8px;
+    font-size: 1.1em;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #0069d9;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+.btn-secondary:hover {
+    background-color: #5a6268;
+    transform: translateY(-1px);
+    box_shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    color: white;
+}
+.btn-info:hover {
+    background-color: #138496;
+    transform: translateY(-1px);
+    box_shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+}
+.btn-success:hover {
+    background-color: #218838;
+    transform: translateY(-1px);
+    box_shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.btn-download {
+    background-color: #ffc107;
+    color: #212529;
+}
+.btn-download:hover {
+    background-color: #e0a800;
+    transform: translateY(-1px);
+    box_shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.btn-ai-action {
+    /* Specific style for AI buttons if needed, e.g. slightly different shade */
+}
+
+.btn-disabled {
+    background-color: #adb5bd;
+    color: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.75;
+}
+.btn-disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.btn-quick-link {
+    background-color: #e9ecef;
+    color: #2c3e50;
+    padding: 8px 15px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.btn-quick-link:hover {
+    background-color: #d3d9df;
+}
+
+/* --- AI Output & Card Styling --- */
+.card {
+    background-color: #fff;
+    border: 1px solid #e0e4e7;
+    border-radius: 8px;
+    margin-top: 25px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.card-header {
+    background-color: #f8f9fa;
+    padding: 12px 20px;
+    border-bottom: 1px solid #e0e4e7;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #343a40;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+.card-body {
+    padding: 20px;
+}
+.card-body p {
+    margin-bottom: 10px;
+}
+
+.ai-output-section h3.card-header .emoji {
+    margin-right: 8px;
+}
+
+.ai-text-output, .debug-json-output {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #e9ecef;
+    max-height: 400px;
+    overflow-y: auto;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9em;
+    color: #212529;
+}
+
+/* --- Flash Messages --- */
+.flash-messages {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+.flash-messages li {
+    padding: 12px 20px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    font-size: 0.95em;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.flash-messages li::before {
+    margin-right: 10px;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.flash-success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #badbcc;
+}
+.flash-success::before { content: '✅'; }
+
+.flash-error {
+    background-color: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
+}
+.flash-error::before { content: '❌'; }
+
+.flash-info {
+    background-color: #cff4fc;
+    color: #055160;
+    border: 1px solid #b6effb;
+}
+.flash-info::before { content: 'ℹ️'; }
+
+.flash-warning {
+    background-color: #fff3cd;
+    color: #664d03;
+    border: 1px solid #ffecb5;
+}
+.flash-warning::before { content: '⚠️'; }
+
+/* --- Debug JSON Area --- */
+.debug-json-container details > summary {
+    cursor: pointer;
+    font-weight: normal; /* Override card-header bold if needed */
+}
+.debug-json-container details > summary:hover {
+    background-color: #e9ecef;
+}
+
+.info-text {
+    color: #555;
+    font-style: italic;
+    margin: 15px 0;
+}
+
+/* Responsive adjustments (basic) */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px;
+    }
+    .action-buttons-group {
+        flex-direction: column;
+    }
+    .btn {
+        width: 100%;
+        margin-bottom: 10px; /* Add space when buttons stack */
+    }
+    .action-buttons-group .btn:last-child {
+        margin-bottom: 0;
+    }
+}

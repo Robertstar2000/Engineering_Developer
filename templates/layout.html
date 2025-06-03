@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Engineering Partner AI{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+</head>
+<body>
+    <aside class="sidebar">
+        <h1><a href="{{ url_for('index') }}"><span class="emoji">🤖</span>EngPartner</a></h1>
+        <nav>
+            <ul>
+                {# The get_all_phases_for_nav is injected by context_processor in app.py #}
+                {% set all_phases = get_all_phases_for_nav() %}
+                {% for phase_item in all_phases %}
+                <li>
+                    <a href="{{ url_for('show_phase', phase_id=phase_item.id) }}"
+                       class="{{ 'active' if active_phase_id == phase_item.id else '' }}">
+                       {{ phase_item.id }}. {{ phase_item.title }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <p>Version 1.0.0</p>
+            {# <p><a href="#">Docs</a></p> #}
+        </div>
+    </aside>
+    <main class="main-content">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flash-messages">
+                {% for category, message in messages %}
+                    <li class="flash-{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+    <script>
+        // Simple script to make active nav link visible if sidebar is scrollable
+        document.addEventListener('DOMContentLoaded', function() {
+            const activeLink = document.querySelector('.sidebar nav ul li a.active');
+            if (activeLink) {
+                activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        });
+    </script>
+</body>
+</html>

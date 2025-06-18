@@ -1,4 +1,5 @@
 import yaml
+import os
 from dataclasses import dataclass, field
 from typing import List, Dict, Any, Optional # Added Optional
 
@@ -109,3 +110,40 @@ if __name__ == '__main__':
         #     print(f"Test retrieval for Phase 1: {test_phase_1.title}")
         #     if test_phase_1.fields:
         #         print(f"  Field 'project_name' label: {test_phase_1.fields['project_name'].label}")
+
+# Database Configuration
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+DEFAULT_SQLITE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'instance', 'app.db')
+
+# Default to SQLite for local development if DATABASE_URL is not set.
+# For production, DATABASE_URL should be set to a PostgreSQL connection string.
+SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', DEFAULT_SQLITE_URI)
+SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+# Check for DATABASE_URL and inform if using default SQLite
+if not os.environ.get('DATABASE_URL'):
+    print(f"INFO: DATABASE_URL environment variable not set. Using default SQLite URI: {SQLALCHEMY_DATABASE_URI}")
+    # Ensure the instance folder exists for SQLite
+    os.makedirs(os.path.join(BASE_DIR, 'instance'), exist_ok=True)
+elif 'sqlite' in SQLALCHEMY_DATABASE_URI:
+    print(f"INFO: Using SQLite database: {SQLALCHEMY_DATABASE_URI}")
+    # Ensure the instance folder exists for SQLite if it's specified in the path and is relative
+    if SQLALCHEMY_DATABASE_URI.startswith('sqlite:///./'):
+        instance_path = os.path.join(BASE_DIR, os.path.dirname(SQLALCHEMY_DATABASE_URI.replace('sqlite:///./','')))
+        os.makedirs(instance_path, exist_ok=True)
+    elif SQLALCHEMY_DATABASE_URI.startswith('sqlite:///instance'):
+         os.makedirs(os.path.join(BASE_DIR, 'instance'), exist_ok=True)
+else:
+    print(f"INFO: Using configured DATABASE_URL: {SQLALCHEMY_DATABASE_URI}")
+
+# Check for Gemini API Key
+GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
+if not GEMINI_API_KEY:
+    print("CRITICAL: GEMINI_API_KEY environment variable not set.")
+    print("This key is essential for interacting with the Gemini API.")
+    print("Please set this variable to your Google Generative AI API key.")
+    # Depending on the application's design, you might:
+    # - Raise an exception: raise EnvironmentError("GEMINI_API_KEY not set.")
+    # - Exit the application: sys.exit("Exiting: GEMINI_API_KEY not set.")
+    # - Use a mock/dummy key if some parts of the app can run without it (not recommended for core features).
+    # For now, just printing a critical warning.

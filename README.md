@@ -75,12 +75,17 @@ engineering-partner-flask/
     ```bash
     pip install -r requirements.txt
     ```
+    This will install Flask, along with `Flask-SQLAlchemy` and `Flask-Migrate` for database operations, `psycopg2-binary` for PostgreSQL support (though SQLite is the default for development), and `Flask-WTF` for security features like CSRF protection.
 
 5.  **Set Environment Variables:**
-    The application requires your Gemini API Key and a Flask Secret Key.
+    The application requires your Gemini API Key, a Flask Secret Key, and optionally a Database URL.
 
     *   **`GEMINI_API_KEY`**: Your actual API key from Google AI Studio.
-    *   **`FLASK_SECRET_KEY`**: A long, random string for securing Flask sessions. For development, `app.py` has a default, but it's better to set your own.
+    *   **`FLASK_SECRET_KEY`**: A long, random string for securing Flask sessions and other security features. For development, `app.py` has a default, but it's crucial to set your own for production.
+    *   **`DATABASE_URL`**: (Optional for development, recommended for production)
+        *   Specifies the connection URL for the database.
+        *   Example format for PostgreSQL: `postgresql://user:password@host:port/dbname`
+        *   If not set, the application defaults to using a local SQLite database (`instance/app.db`), which is suitable for development and initial testing.
 
     **Option A: Using `setup_env.ps1` (Windows PowerShell users):**
     If you are on Windows and using PowerShell, you can run the provided script:
@@ -110,8 +115,30 @@ engineering-partner-flask/
         ```cmd
         set GEMINI_API_KEY="YOUR_ACTUAL_GEMINI_API_KEY"
         set FLASK_SECRET_KEY="your_very_strong_and_unique_secret_key_here"
+        set DATABASE_URL="postgresql://user:password@host:port/dbname"
         ```
         (To set them permanently on Windows, search for "environment variables" in the Start Menu to edit system environment variables.)
+
+6.  **Initialize the Database:**
+    After installing dependencies, you need to set up the database schema. These commands should be run from the project root directory where `app.py` is located. You might need to set `FLASK_APP=app.py` in your environment first (e.g., `export FLASK_APP=app.py` on Linux/macOS or `set FLASK_APP=app.py` on Windows CMD for the current session).
+
+    *   **Initialize migrations (if a 'migrations' folder doesn't exist):**
+        ```bash
+        python -m flask db init
+        ```
+        This command creates the `migrations` folder and configuration for database schema versioning. Skip if the folder already exists.
+
+    *   **Generate the initial migration script:**
+        ```bash
+        python -m flask db migrate -m "Initial database setup"
+        ```
+        This command inspects your SQLAlchemy models (defined in `app.py`) and generates a script to create the corresponding database tables.
+
+    *   **Apply the migration to the database:**
+        ```bash
+        python -m flask db upgrade
+        ```
+        This command applies the generated migration script, creating the tables in your database (SQLite by default, or PostgreSQL if `DATABASE_URL` is set).
 
 ## Running the Application
 
@@ -138,7 +165,7 @@ engineering-partner-flask/
 -   Navigate through the phases using the sidebar.
 -   Enter data into the fields for each phase.
 -   Use the buttons to:
-    -   **Save Progress**: Saves the current phase's data to your session.
+    -   **Save Progress**: Saves the current phase's data to the database.
     -   **Generate Solution**: Uses AI to create a summary based on your input for the current phase.
     -   **Generate Document**: Uses AI to create a full Markdown document for the current phase, based on its outline and all data entered up to this point.
     -   **Seed Phase X**: Pre-fills data for the next phase using AI, based on the current phase's content.
@@ -153,9 +180,9 @@ The application is designed to be dynamic. The HTML templates for phases (`templ
 
 ## Key Considerations for Further Development
 
-*   **Error Handling**: While basic error handling is in place, it can be further enhanced for a production application.
-*   **CSRF Protection**: For production, integrate Flask-WTF or a similar library for CSRF protection on forms.
-*   **Database Persistence**: The current version uses Flask sessions for data storage (data is lost when the browser session ends). For persistent storage (like PostgreSQL as mentioned in the original spec), you would need to integrate a database (e.g., using SQLAlchemy) and modify the data helper functions in `app.py`.
+*   **Error Handling**: Enhanced with custom error pages for 404/500 errors, a general exception handler, and more user-friendly feedback on errors.
+*   **CSRF Protection**: Implemented using Flask-WTF to protect forms against CSRF attacks.
+*   **Database Persistence**: Implemented using Flask-SQLAlchemy and Flask-Migrate. Data is stored in a database (defaults to SQLite if `DATABASE_URL` is not set, PostgreSQL recommended for production). This provides persistent storage across sessions.
 *   **User Authentication**: If multiple users or projects are needed, implement a user authentication and authorization system.
 *   **Asynchronous Operations**: For long-running AI calls, consider using background tasks (e.g., with Celery and Redis/RabbitMQ) to improve UI responsiveness.
 *   **Testing**: Implement comprehensive unit and integration tests.

@@ -3,3 +3,7 @@ PyYAML>=5.0 # For parsing phases.yaml
 google-generativeai>=0.5.0 # For interacting with the Gemini API
 backoff>=2.0.0 # For retry logic with the Gemini API
 python-dotenv>=0.15 # Optional: For managing environment variables from a .env file during development
+Flask-SQLAlchemy>=2.5
+psycopg2-binary>=2.9
+Flask-Migrate>=3.0
+Flask-WTF>=1.0

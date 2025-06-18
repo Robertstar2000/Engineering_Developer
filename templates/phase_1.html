@@ -7,6 +7,7 @@
     <h2 class="page-header"><span class="phase-number">{{ phase_config.id }}</span> {{ phase_config.title }}</h2>
 
     <form method="POST" action="{{ url_for('handle_phase_action', phase_id=phase_config.id) }}" class="phase-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
         {# CSRF token would go here if using Flask-WTF: {{ form.csrf_token }} #}
 
         {% if phase_config.fields %}

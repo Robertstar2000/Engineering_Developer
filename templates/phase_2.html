@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ phase_config.title }} - EngPartner AI{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h2 class="page-header"><span class="phase-number">{{ phase_config.id }}</span> {{ phase_config.title }}</h2>
+
+    <form method="POST" action="{{ url_for('handle_phase_action', phase_id=phase_config.id) }}" class="phase-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        {# CSRF token would go here if using Flask-WTF: {{ form.csrf_token }} #}
+
+        {% if phase_config.fields %}
+            {% for field_key, field_meta in phase_config.fields.items() %}
+            <div class="form-group">
+                <label for="{{ field_key }}">{{ field_meta.label }}</label>
+                {% if field_meta.type == 'multi' %}
+                <textarea name="{{ field_key }}" id="{{ field_key }}" rows="6" placeholder="{{ field_meta.placeholder }}">{{ phase_data.get(field_key, '') }}</textarea>
+                {% else %}
+                <input type="text" name="{{ field_key }}" id="{{ field_key }}" value="{{ phase_data.get(field_key, '') }}" placeholder="{{ field_meta.placeholder }}">
+                {% endif %}
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="info-text"><em>No specific data fields are configured for this phase in <code>phases.yaml</code>.</em></p>
+        {% endif %}
+
+        <div class="action-buttons-group">
+            <button type="submit" name="action" value="save" class="btn btn-primary"><span class="emoji">💾</span> Save Progress</button>
+            <button type="submit" name="action" value="generate_solution" class="btn btn-ai-action btn-info"><span class="emoji">💡</span> Generate Solution</button>
+
+            {% if phase_config.document and phase_config.document.name and phase_config.document.outline %}
+            <button type="submit" name="action" value="generate_doc" class="btn btn-ai-action btn-success"><span class="emoji">📄</span> Generate Document</button>
+            {% else %}
+            <button type="button" class="btn btn-disabled" title="Document generation not available: No document or outline configured for this phase." disabled><span class="emoji">📄</span> Generate Document</button>
+            {% endif %}
+
+            {% if phase_config.id < max_phase_id %}
+            <button type="submit" name="action" value="seed_next" class="btn btn-secondary"><span class="emoji">🌱</span> Seed Phase {{ phase_config.id + 1 }}</button>
+            {% else %}
+            <button type="button" class="btn btn-disabled" title="Cannot seed: This is the last phase." disabled><span class="emoji">🌱</span> Seed Next Phase</button>
+            {% endif %}
+        </div>
+    </form>
+
+    {% if phase_data.get('_solution_summary') %}
+    <div class="ai-output-section solution-summary-section card">
+        <h3 class="card-header">💡 AI Solution Summary</h3>
+        <div class="card-body">
+            <pre class="ai-text-output">{{ phase_data['_solution_summary'] }}</pre>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if phase_data.get('_generated_doc_filename') %}
+    <div class="ai-output-section document-download-section card">
+        <h3 class="card-header">📄 Document Ready for Download</h3>
+        <div class="card-body">
+            <p>Your document "<strong>{{ phase_data['_generated_doc_filename'] }}</strong>" has been generated.</p>
+            <a href="{{ url_for('download_file', filename=phase_data['_generated_doc_filename']) }}" class="btn btn-download" target="_blank">
+                <span class="emoji">⬇️</span> Download {{ phase_config.document.name if phase_config.document else "Document" }}
+            </a>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="debug-json-container card" style="margin-top: 30px;">
+        <details>
+            <summary class="card-header">⚙️ View Raw Phase Data (Debug)</summary>
+            <div class="card-body">
+                <h4>Current Phase {{ phase_config.id }} Data (from Session):</h4>
+                <pre class="debug-json-output">{{ phase_data_json_str }}</pre>
+                <h4>All Project Data (from Session):</h4>
+                <pre class="debug-json-output">{{ all_project_data_json_str }}</pre>
+            </div>
+        </details>
+    </div>
+</div>
+{% endblock %}
